@@ -1,4 +1,10 @@
 // src/components/CafeInfo.tsx
+/**
+ * 
+Крок 2. Компонент CafeInfo
+Створи компонент із назвою та коротким описом кав’ярні. Він має створювати таку розмітку:
+
+*/
 import css from "./CafeInfo.module.css";
 
 export default function CafeInfo() {

@@ -8,15 +8,25 @@ import VoteStats from "./VoteStats/VoteStats";
 import Notification from "./Notification/Notification";
 
 export default function App() {
-  //Таким чином, votes буде центральним джерелом даних про голосування,
-  // а всі відповідні компоненти зможуть отримувати актуальні значення
-  // через пропси.
+  /**
+   * Крок 3. Стан додатка
+
+
+   */
+
   const [votes, setVote] = useState<Votes>({
     good: 0,
     neutral: 0,
     bad: 0,
   });
 
+  //Функції для роботи зі станом
+  const handleVote = (voteType: VoteType) => {
+    setVote((prev) => ({
+      ...prev,
+      [voteType]: prev[voteType] + 1,
+    }));
+  };
   const resetVotes = () => {
     setVote({
       good: 0,
@@ -24,14 +34,6 @@ export default function App() {
       bad: 0,
     });
   };
-
-  const handleVote = (voteType: VoteType) => {
-    setVote((prev) => ({
-      ...prev,
-      [voteType]: prev[voteType] + 1,
-    }));
-  };
-
   // Крок 6. Обчислення статистики
 
   const totalVotes = votes.good + votes.neutral + votes.bad;
