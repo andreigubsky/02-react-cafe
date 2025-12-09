@@ -17,10 +17,11 @@ export default function App() {
     bad: 0,
   });
 
-  const resetVotes = (voteType: VoteType) => {
+  const resetVotes = () => {
     setVote({
-      ...votes,
-      [voteType]: 0,
+      good: 0,
+      neutral: 0,
+      bad: 0,
     });
   };
 
@@ -34,8 +35,8 @@ export default function App() {
   // Крок 6. Обчислення статистики
 
   const totalVotes = votes.good + votes.neutral + votes.bad;
-  
-  let positiveRate = totalVotes
+
+  const positiveRate = totalVotes
     ? Math.round((votes.good / totalVotes) * 100)
     : 0;
 
@@ -43,10 +44,21 @@ export default function App() {
     <>
       <div className={css.app}>
         <CafeInfo />
-        <VoteOptions />
-        (totalVotes>0) 
-        ? <VoteStats votes={votes} onVote={handleVote} onReset={resetVotes} />
-        : <Notification />
+        <VoteOptions
+          votes={votes}
+          onVote={handleVote}
+          onReset={resetVotes}
+          canReset={totalVotes > 0}
+        />
+        {totalVotes > 0 ? (
+          <VoteStats
+            votes={votes}
+            totalVotes={totalVotes}
+            positiveRate={positiveRate}
+          />
+        ) : (
+          <Notification />
+        )}
       </div>
     </>
   );
