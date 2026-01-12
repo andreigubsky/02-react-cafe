@@ -1,16 +1,14 @@
-// src/components/CafeInfo.tsx
+// src/components/VoteOptions.tsx
 import css from "./VoteOptions.module.css";
-import type { Votes, VoteType } from "../../types/votes";
+import type { VoteType } from "../../types/votes";
 
 interface VoteOptionsProps {
-  votes: Votes;
   onVote: (voteType: VoteType) => void;
   onReset: () => void;
   canReset: boolean;
 }
 
 export default function VoteOptions({
-  votes,
   onVote,
   onReset,
   canReset,
@@ -19,13 +17,13 @@ export default function VoteOptions({
     <>
       <div className={css.container}>
         <button className={css.button} onClick={() => onVote("good")}>
-          Good ({votes.good})
+          Good
         </button>
         <button className={css.button} onClick={() => onVote("neutral")}>
-          Neutral ({votes.neutral})
+          Neutral
         </button>
         <button className={css.button} onClick={() => onVote("bad")}>
-          Bad ({votes.bad})
+          Bad
         </button>
         {canReset && (
           <button
